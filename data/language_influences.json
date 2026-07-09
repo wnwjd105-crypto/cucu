@@ -1,0 +1,76 @@
+{
+  "influences": [
+    {
+      "from": "latin",
+      "to": "spanish",
+      "period_id": "ce_10",
+      "type": "parent"
+    },
+    {
+      "from": "latin",
+      "to": "french",
+      "period_id": "ce_9",
+      "type": "parent"
+    },
+    {
+      "from": "latin",
+      "to": "portuguese",
+      "period_id": "ce_10",
+      "type": "parent"
+    },
+    {
+      "from": "sanskrit",
+      "to": "hindi",
+      "period_id": "ce_7",
+      "type": "parent"
+    },
+    {
+      "from": "greek",
+      "to": "latin",
+      "period_id": "ancient_4",
+      "type": "influence"
+    },
+    {
+      "from": "chinese",
+      "to": "japanese",
+      "period_id": "ce_1",
+      "type": "influence"
+    },
+    {
+      "from": "chinese",
+      "to": "korean",
+      "period_id": "ancient_4",
+      "type": "influence"
+    },
+    {
+      "from": "arabic",
+      "to": "spanish",
+      "period_id": "ce_10",
+      "type": "influence"
+    },
+    {
+      "from": "english",
+      "to": "german",
+      "period_id": "ce_20",
+      "type": "influence"
+    },
+    {
+      "from": "latin",
+      "to": "english",
+      "period_id": "ce_5",
+      "type": "influence"
+    },
+    {
+      "from": "french",
+      "to": "english",
+      "period_id": "ce_15",
+      "type": "influence"
+    },
+    {
+      "from": "sumerian",
+      "to": "akkadian",
+      "period_id": "ancient_2",
+      "type": "influence"
+    }
+  ]
+}

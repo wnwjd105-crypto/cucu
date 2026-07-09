@@ -1,0 +1,258 @@
+{
+  "languages": [
+    {
+      "id": "chinese",
+      "name": "중국어",
+      "family": "중국티베트어족",
+      "origin_year": -1250,
+      "origin_location": {
+        "lat": 34.3416,
+        "lng": 108.9398
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%EC%A4%91%EA%B5%AD%EC%96%B4",
+      "periods": [
+        {"period_id": "ancient_4", "status": "emerging"},
+        {"period_id": "ancient_5", "status": "established"},
+        {"period_id": "ce_1", "status": "expanding"}
+      ]
+    },
+    {
+      "id": "japanese",
+      "name": "일본어",
+      "family": "일본어족",
+      "origin_year": -300,
+      "origin_location": {
+        "lat": 35.6762,
+        "lng": 139.6503
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%EC%9D%BC%EB%B3%B8%EC%96%B4",
+      "periods": [
+        {"period_id": "ancient_5", "status": "emerging"},
+        {"period_id": "ce_1", "status": "established"}
+      ]
+    },
+    {
+      "id": "korean",
+      "name": "한국어",
+      "family": "한국어족",
+      "origin_year": -2333,
+      "origin_location": {
+        "lat": 37.5665,
+        "lng": 126.9780
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%ED%95%9C%EA%B5%AD%EC%96%B4",
+      "periods": [
+        {"period_id": "ancient_3", "status": "emerging"},
+        {"period_id": "ancient_4", "status": "established"}
+      ]
+    },
+    {
+      "id": "latin",
+      "name": "라틴어",
+      "family": "인도유럽어족",
+      "origin_year": -700,
+      "origin_location": {
+        "lat": 41.9028,
+        "lng": 12.4964
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%EB%9D%BC%ED%8B%B4%EC%96%B4",
+      "periods": [
+        {"period_id": "ancient_4", "status": "emerging"},
+        {"period_id": "ancient_5", "status": "established"},
+        {"period_id": "ce_1", "status": "dominant"},
+        {"period_id": "ce_5", "status": "declining"}
+      ]
+    },
+    {
+      "id": "sanskrit",
+      "name": "산스크리트어",
+      "family": "인도유럽어족",
+      "origin_year": -1500,
+      "origin_location": {
+        "lat": 25.5941,
+        "lng": 85.1376
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%EC%82%B0%EC%8A%A4%ED%81%AC%EB%A6%AC%ED%8A%B8%EC%96%B4",
+      "periods": [
+        {"period_id": "ancient_3", "status": "emerging"},
+        {"period_id": "ancient_4", "status": "established"},
+        {"period_id": "ce_7", "status": "declining"}
+      ]
+    },
+    {
+      "id": "arabic",
+      "name": "아랍어",
+      "family": "아프로아시아어족",
+      "origin_year": -100,
+      "origin_location": {
+        "lat": 23.8859,
+        "lng": 45.0792
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%EC%95%84%EB%9E%8D%EC%96%B4",
+      "periods": [
+        {"period_id": "ancient_5", "status": "emerging"},
+        {"period_id": "ce_7", "status": "expanding"},
+        {"period_id": "ce_10", "status": "dominant"}
+      ]
+    },
+    {
+      "id": "english",
+      "name": "영어",
+      "family": "인도유럽어족",
+      "origin_year": 450,
+      "origin_location": {
+        "lat": 51.5074,
+        "lng": -0.1278
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%EC%98%81%EC%96%B4",
+      "periods": [
+        {"period_id": "ce_5", "status": "emerging"},
+        {"period_id": "ce_15", "status": "established"},
+        {"period_id": "ce_20", "status": "expanding"},
+        {"period_id": "ce_27", "status": "dominant"}
+      ]
+    },
+    {
+      "id": "spanish",
+      "name": "스페인어",
+      "family": "인도유럽어족",
+      "origin_year": 900,
+      "origin_location": {
+        "lat": 40.4168,
+        "lng": -3.7038
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%EC%8A%A4%ED%8E%98%EC%9D%B8%EC%96%B4",
+      "periods": [
+        {"period_id": "ce_10", "status": "emerging"},
+        {"period_id": "ce_15", "status": "established"},
+        {"period_id": "ce_16", "status": "expanding"}
+      ]
+    },
+    {
+      "id": "french",
+      "name": "프랑스어",
+      "family": "인도유럽어족",
+      "origin_year": 800,
+      "origin_location": {
+        "lat": 46.2276,
+        "lng": 2.2137
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%ED%94%84%EB%9E%91%EC%8A%A4%EC%96%B4",
+      "periods": [
+        {"period_id": "ce_9", "status": "emerging"},
+        {"period_id": "ce_15", "status": "established"}
+      ]
+    },
+    {
+      "id": "german",
+      "name": "독일어",
+      "family": "인도유럽어족",
+      "origin_year": 750,
+      "origin_location": {
+        "lat": 51.1657,
+        "lng": 10.4515
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%EB%8F%85%EC%9D%BC%EC%96%B4",
+      "periods": [
+        {"period_id": "ce_8", "status": "emerging"},
+        {"period_id": "ce_15", "status": "established"}
+      ]
+    },
+    {
+      "id": "russian",
+      "name": "러시아어",
+      "family": "인도유럽어족",
+      "origin_year": 900,
+      "origin_location": {
+        "lat": 55.7558,
+        "lng": 37.6173
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%EB%9F%AC%EC%8B%9C%EC%95%84%EC%96%B4",
+      "periods": [
+        {"period_id": "ce_10", "status": "emerging"},
+        {"period_id": "ce_15", "status": "established"},
+        {"period_id": "ce_20", "status": "expanding"}
+      ]
+    },
+    {
+      "id": "hindi",
+      "name": "힌디어",
+      "family": "인도유럽어족",
+      "origin_year": 700,
+      "origin_location": {
+        "lat": 28.6139,
+        "lng": 77.2090
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%ED%9E%8C%EB%94%94%EC%96%B4",
+      "periods": [
+        {"period_id": "ce_7", "status": "emerging"},
+        {"period_id": "ce_15", "status": "established"},
+        {"period_id": "ce_27", "status": "expanding"}
+      ]
+    },
+    {
+      "id": "portuguese",
+      "name": "포르투갈어",
+      "family": "인도유럽어족",
+      "origin_year": 900,
+      "origin_location": {
+        "lat": 38.7223,
+        "lng": -9.1393
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%ED%8F%AC%EB%A5%B4%ED%88%AC%EA%B0%88%EC%96%B4",
+      "periods": [
+        {"period_id": "ce_10", "status": "emerging"},
+        {"period_id": "ce_15", "status": "established"},
+        {"period_id": "ce_16", "status": "expanding"}
+      ]
+    },
+    {
+      "id": "greek",
+      "name": "그리스어",
+      "family": "인도유럽어족",
+      "origin_year": -1450,
+      "origin_location": {
+        "lat": 39.0742,
+        "lng": 21.8243
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%EA%B7%B8%EB%A6%AC%EC%8A%A4%EC%96%B4",
+      "periods": [
+        {"period_id": "ancient_3", "status": "emerging"},
+        {"period_id": "ancient_4", "status": "established"},
+        {"period_id": "ce_1", "status": "dominant"}
+      ]
+    },
+    {
+      "id": "sumerian",
+      "name": "수메르어",
+      "family": "고립어",
+      "origin_year": -3500,
+      "origin_location": {
+        "lat": 31.3877,
+        "lng": 45.6696
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%EC%88%98%EB%A9%94%EB%A5%B4%EC%96%B4",
+      "periods": [
+        {"period_id": "ancient_1", "status": "emerging"},
+        {"period_id": "ancient_2", "status": "dominant"},
+        {"period_id": "ancient_3", "status": "extinct"}
+      ]
+    },
+    {
+      "id": "egyptian",
+      "name": "이집트어",
+      "family": "아프로아시아어족",
+      "origin_year": -3200,
+      "origin_location": {
+        "lat": 26.8206,
+        "lng": 30.8025
+      },
+      "wikipedia_url": "https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%A7%91%ED%8A%B8%EC%96%B4",
+      "periods": [
+        {"period_id": "ancient_1", "status": "emerging"},
+        {"period_id": "ancient_2", "status": "dominant"},
+        {"period_id": "ce_7", "status": "extinct"}
+      ]
+    }
+  ]
+}

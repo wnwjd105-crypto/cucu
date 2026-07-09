@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>언어 진화 지도</title>
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+        #globe {
+            height: 100vh;
+            width: 100%;
+            display: none;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #toggle-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid #333;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        #toggle-btn:hover {
+            background: #f0f0f0;
+        }
+        #time-slider-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            width: 60%;
+            max-width: 600px;
+        }
+        #time-slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+        #current-period {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        #period-description {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .language-popup {
+            min-width: 200px;
+        }
+        .language-popup h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .language-popup p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .language-popup a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .language-popup a:hover {
+            text-decoration: underline;
+        }
+        .origin-marker {
+            background: #ff6b6b;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <button id="toggle-btn">지구본으로 보기</button>
+    <div id="map"></div>
+    <div id="globe"></div>
+    
+    <div id="time-slider-container">
+        <div id="current-period">기원전 4000-3000년</div>
+        <div id="period-description">4대 문명 발생기 (수메르, 이집트, 인더스, 황하)</div>
+        <input type="range" id="time-slider" min="0" max="31" value="0" step="1">
+    </div>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/three@0.153.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/globe.gl@2.28.5/dist/globe.gl.min.js"></script>
+    
+    <script>
+        let timePeriods = [];
+        let languages = [];
+        let influences = [];
+        let historicalBoundaries = [];
+        let currentPeriodIndex = 0;
+        let map, globe;
+        let languageMarkers = [];
+        let influenceArrows = [];
+        let boundaryPolygons = [];
+        
+        // Load data
+        async function loadData() {
+            const [periodsRes, langsRes, inflRes, boundsRes] = await Promise.all([
+                fetch('/api/time-periods'),
+                fetch('/api/languages'),
+                fetch('/api/language-influences'),
+                fetch('/api/historical-boundaries')
+            ]);
+            
+            timePeriods = (await periodsRes.json()).periods;
+            languages = (await langsRes.json()).languages;
+            influences = (await inflRes.json()).influences;
+            historicalBoundaries = (await boundsRes.json()).boundaries;
+            
+            initializeMap();
+            initializeGlobe();
+            updateDisplay();
+        }
+        
+        function initializeMap() {
+            map = L.map('map').setView([20, 0], 2);
+            
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 19
+            }).addTo(map);
+        }
+        
+        function initializeGlobe() {
+            globe = Globe()
+                .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+                .showGlobe(true)
+                .showAtmosphere(true)
+                (document.getElementById('globe'));
+            
+            globe.controls().autoRotate = true;
+            globe.controls().autoRotateSpeed = 0.5;
+        }
+        
+        function updateDisplay() {
+            const period = timePeriods[currentPeriodIndex];
+            document.getElementById('current-period').textContent = period.name;
+            document.getElementById('period-description').textContent = period.description;
+            
+            // Clear existing markers, arrows, and boundaries
+            languageMarkers.forEach(marker => map.removeLayer(marker));
+            influenceArrows.forEach(arrow => map.removeLayer(arrow));
+            boundaryPolygons.forEach(polygon => map.removeLayer(polygon));
+            languageMarkers = [];
+            influenceArrows = [];
+            boundaryPolygons = [];
+            
+            // Add historical boundaries for current period
+            const boundaryData = historicalBoundaries.find(b => b.period_id === period.id);
+            if (boundaryData) {
+                boundaryData.regions.forEach(region => {
+                    const polygon = L.polygon(region.coordinates, {
+                        color: '#666',
+                        weight: 2,
+                        opacity: 0.5,
+                        fillOpacity: 0.1,
+                        fillColor: '#ccc'
+                    }).addTo(map);
+                    
+                    polygon.bindTooltip(region.name, {
+                        permanent: false,
+                        direction: 'center',
+                        className: 'boundary-label'
+                    });
+                    
+                    boundaryPolygons.push(polygon);
+                });
+            }
+            
+            // Add language markers for current period
+            languages.forEach(lang => {
+                const periodData = lang.periods.find(p => p.period_id === period.id);
+                if (periodData && (periodData.status === 'emerging' || periodData.status === 'established' || periodData.status === 'dominant' || periodData.status === 'expanding')) {
+                    const marker = L.circleMarker([lang.origin_location.lat, lang.origin_location.lng], {
+                        radius: 8,
+                        fillColor: getStatusColor(periodData.status),
+                        color: '#fff',
+                        weight: 2,
+                        opacity: 1,
+                        fillOpacity: 0.8
+                    }).addTo(map);
+                    
+                    marker.bindPopup(`
+                        <div class="language-popup">
+                            <h3>${lang.name}</h3>
+                            <p><strong>어족:</strong> ${lang.family}</p>
+                            <p><strong>기원:</strong> ${lang.origin_year > 0 ? lang.origin_year + '년' : '기원전 ' + Math.abs(lang.origin_year) + '년'}</p>
+                            <p><strong>상태:</strong> ${getStatusText(periodData.status)}</p>
+                            <a href="${lang.wikipedia_url}" target="_blank">위키피디아에서 보기</a>
+                        </div>
+                    `);
+                    
+                    languageMarkers.push(marker);
+                }
+            });
+            
+            // Add influence arrows for current period
+            influences.forEach(inf => {
+                if (inf.period_id === period.id) {
+                    const fromLang = languages.find(l => l.id === inf.from);
+                    const toLang = languages.find(l => l.id === inf.to);
+                    
+                    if (fromLang && toLang) {
+                        const arrow = L.polyline([
+                            [fromLang.origin_location.lat, fromLang.origin_location.lng],
+                            [toLang.origin_location.lat, toLang.origin_location.lng]
+                        ], {
+                            color: inf.type === 'parent' ? '#ff6b6b' : '#4ecdc4',
+                            weight: 3,
+                            opacity: 0.7,
+                            dashArray: '5, 10'
+                        }).addTo(map);
+                        
+                        influenceArrows.push(arrow);
+                    }
+                }
+            });
+        }
+        
+        function getStatusColor(status) {
+            const colors = {
+                'emerging': '#ff6b6b',
+                'established': '#4ecdc4',
+                'dominant': '#45b7d1',
+                'expanding': '#96ceb4',
+                'declining': '#ffeaa7',
+                'extinct': '#bdc3c7'
+            };
+            return colors[status] || '#95a5a6';
+        }
+        
+        function getStatusText(status) {
+            const texts = {
+                'emerging': '발생기',
+                'established': '정착기',
+                'dominant': '우세',
+                'expanding': '확장중',
+                'declining': '쇠퇴기',
+                'extinct': '소멸'
+            };
+            return texts[status] || status;
+        }
+        
+        // Toggle between 2D and Globe
+        const btn = document.getElementById('toggle-btn');
+        const mapDiv = document.getElementById('map');
+        const globeDiv = document.getElementById('globe');
+        let isGlobe = false;
+        
+        btn.addEventListener('click', () => {
+            isGlobe = !isGlobe;
+            if (isGlobe) {
+                mapDiv.style.display = 'none';
+                globeDiv.style.display = 'block';
+                btn.textContent = '2D 지도로 보기';
+                globe.resize();
+            } else {
+                mapDiv.style.display = 'block';
+                globeDiv.style.display = 'none';
+                btn.textContent = '지구본으로 보기';
+                map.invalidateSize();
+            }
+        });
+        
+        // Time slider
+        const slider = document.getElementById('time-slider');
+        slider.addEventListener('input', (e) => {
+            currentPeriodIndex = parseInt(e.target.value);
+            updateDisplay();
+        });
+        
+        // Initialize
+        loadData();
+    </script>
+</body>
+</html>

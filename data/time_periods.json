@@ -1,0 +1,228 @@
+{
+  "periods": [
+    {
+      "id": "ancient_1",
+      "name": "기원전 4000-3000년",
+      "start_year": -4000,
+      "end_year": -3000,
+      "description": "4대 문명 발생기 (수메르, 이집트, 인더스, 황하)"
+    },
+    {
+      "id": "ancient_2",
+      "name": "기원전 3000-2000년",
+      "start_year": -3000,
+      "end_year": -2000,
+      "description": "초기 문자 및 언어 기록"
+    },
+    {
+      "id": "ancient_3",
+      "name": "기원전 2000-1000년",
+      "start_year": -2000,
+      "end_year": -1000,
+      "description": "인도유럽어족 분화"
+    },
+    {
+      "id": "ancient_4",
+      "name": "기원전 1000-500년",
+      "start_year": -1000,
+      "end_year": -500,
+      "description": "고대 그리스어, 중국어 초기 형성"
+    },
+    {
+      "id": "ancient_5",
+      "name": "기원전 500-0년",
+      "start_year": -500,
+      "end_year": 0,
+      "description": "라틴어, 산스크리트어 확산"
+    },
+    {
+      "id": "ce_1",
+      "name": "1-100년",
+      "start_year": 1,
+      "end_year": 100,
+      "description": "로마 제국 언어 통일"
+    },
+    {
+      "id": "ce_2",
+      "name": "101-200년",
+      "start_year": 101,
+      "end_year": 200,
+      "description": ""
+    },
+    {
+      "id": "ce_3",
+      "name": "201-300년",
+      "start_year": 201,
+      "end_year": 300,
+      "description": ""
+    },
+    {
+      "id": "ce_4",
+      "name": "301-400년",
+      "start_year": 301,
+      "end_year": 400,
+      "description": ""
+    },
+    {
+      "id": "ce_5",
+      "name": "401-500년",
+      "start_year": 401,
+      "end_year": 500,
+      "description": "로마 멸망, 언어 분화 시작"
+    },
+    {
+      "id": "ce_6",
+      "name": "501-600년",
+      "start_year": 501,
+      "end_year": 600,
+      "description": ""
+    },
+    {
+      "id": "ce_7",
+      "name": "601-700년",
+      "start_year": 601,
+      "end_year": 700,
+      "description": "아랍어 확산"
+    },
+    {
+      "id": "ce_8",
+      "name": "701-800년",
+      "start_year": 701,
+      "end_year": 800,
+      "description": ""
+    },
+    {
+      "id": "ce_9",
+      "name": "801-900년",
+      "start_year": 801,
+      "end_year": 900,
+      "description": ""
+    },
+    {
+      "id": "ce_10",
+      "name": "901-1000년",
+      "start_year": 901,
+      "end_year": 1000,
+      "description": ""
+    },
+    {
+      "id": "ce_11",
+      "name": "1001-1100년",
+      "start_year": 1001,
+      "end_year": 1100,
+      "description": ""
+    },
+    {
+      "id": "ce_12",
+      "name": "1101-1200년",
+      "start_year": 1101,
+      "end_year": 1200,
+      "description": ""
+    },
+    {
+      "id": "ce_13",
+      "name": "1201-1300년",
+      "start_year": 1201,
+      "end_year": 1300,
+      "description": "몽골 제국 언어 영향"
+    },
+    {
+      "id": "ce_14",
+      "name": "1301-1400년",
+      "start_year": 1301,
+      "end_year": 1400,
+      "description": ""
+    },
+    {
+      "id": "ce_15",
+      "name": "1401-1500년",
+      "start_year": 1401,
+      "end_year": 1500,
+      "description": "인쇄술 발명, 언어 표준화"
+    },
+    {
+      "id": "ce_16",
+      "name": "1501-1600년",
+      "start_year": 1501,
+      "end_year": 1600,
+      "description": ""
+    },
+    {
+      "id": "ce_17",
+      "name": "1601-1700년",
+      "start_year": 1601,
+      "end_year": 1700,
+      "description": ""
+    },
+    {
+      "id": "ce_18",
+      "name": "1701-1800년",
+      "start_year": 1701,
+      "end_year": 1800,
+      "description": ""
+    },
+    {
+      "id": "ce_19",
+      "name": "1801-1850년",
+      "start_year": 1801,
+      "end_year": 1850,
+      "description": "근대 언어학 태동"
+    },
+    {
+      "id": "ce_20",
+      "name": "1851-1900년",
+      "start_year": 1851,
+      "end_year": 1900,
+      "description": ""
+    },
+    {
+      "id": "ce_21",
+      "name": "1901-1925년",
+      "start_year": 1901,
+      "end_year": 1925,
+      "description": "현대 언어학 성립"
+    },
+    {
+      "id": "ce_22",
+      "name": "1926-1950년",
+      "start_year": 1926,
+      "end_year": 1950,
+      "description": ""
+    },
+    {
+      "id": "ce_23",
+      "name": "1951-1975년",
+      "start_year": 1951,
+      "end_year": 1975,
+      "description": ""
+    },
+    {
+      "id": "ce_24",
+      "name": "1976-2000년",
+      "start_year": 1976,
+      "end_year": 2000,
+      "description": ""
+    },
+    {
+      "id": "ce_25",
+      "name": "2001-2010년",
+      "start_year": 2001,
+      "end_year": 2010,
+      "description": "디지털 시대"
+    },
+    {
+      "id": "ce_26",
+      "name": "2011-2020년",
+      "start_year": 2011,
+      "end_year": 2020,
+      "description": ""
+    },
+    {
+      "id": "ce_27",
+      "name": "2021-현재",
+      "start_year": 2021,
+      "end_year": 2024,
+      "description": ""
+    }
+  ]
+}
