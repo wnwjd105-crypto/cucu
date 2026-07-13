@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.env
+data/*.zip
+data/__MACOSX/
+data/cliopatria_polities_only.geojson
+data/historical_boundaries.json
+data/historical_boundaries_test.json
+data/time_periods.json

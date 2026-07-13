@@ -1,0 +1,74 @@
+{
+  "periods": [
+    {
+      "id": "ancient_35th_33th_century_bce",
+      "name": "기원전 35세기-33세기",
+      "start_year": -3400,
+      "end_year": -3201,
+      "description": "기원전 3400년-3201년"
+    },
+    {
+      "id": "ancient_33th_31th_century_bce",
+      "name": "기원전 33세기-31세기",
+      "start_year": -3200,
+      "end_year": -3001,
+      "description": "기원전 3200년-3001년"
+    },
+    {
+      "id": "ancient_33th_28th_century_bce",
+      "name": "기원전 33세기-28세기",
+      "start_year": -3200,
+      "end_year": -2701,
+      "description": "기원전 3200년-2701년"
+    },
+    {
+      "id": "ancient_31th_28th_century_bce",
+      "name": "기원전 31세기-28세기",
+      "start_year": -3000,
+      "end_year": -2701,
+      "description": "기원전 3000년-2701년"
+    },
+    {
+      "id": "ancient_28th_26th_century_bce",
+      "name": "기원전 28세기-26세기",
+      "start_year": -2700,
+      "end_year": -2501,
+      "description": "기원전 2700년-2501년"
+    },
+    {
+      "id": "ancient_26th_24th_century_bce",
+      "name": "기원전 26세기-24세기",
+      "start_year": -2500,
+      "end_year:": -2301,
+      "description": "기원전 2500년-2301년"
+    },
+    {
+      "id": "ancient_24th_23th_century_bce",
+      "name": "기원전 24세기-23세기",
+      "start_year": -2300,
+      "end_year": -2201,
+      "description": "기원전 2300년-2201년"
+    },
+    {
+      "id": "ancient_24th_21th_century_bce",
+      "name": "기원전 24세기-21세기",
+      "start_year": -2300,
+      "end_year": -2001,
+      "description": "기원전 2300년-2001년"
+    },
+    {
+      "id": "ancient_23th_century_bce",
+      "name": "기원전 23세기",
+      "start_year": -2200,
+      "end_year": -2101,
+      "description": "기원전 2200년-2101년"
+    },
+    {
+      "id": "ancient_23th_22th_century_bce",
+      "name": "기원전 23세기-22세기",
+      "start_year": -2200,
+      "end_year": -2101,
+      "description": "기원전 2200년-2101년"
+    }
+  ]
+}

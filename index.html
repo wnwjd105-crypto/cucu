@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>언어 진화 지도</title>
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #time-slider-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            width: 60%;
+            max-width: 600px;
+        }
+        #time-slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+        #current-period {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        #period-description {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .boundary-label {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #333;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            white-space: nowrap;
+        }
+        .region-popup {
+            min-width: 200px;
+        }
+        .region-popup h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .region-popup p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .region-popup a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .region-popup a:hover {
+            text-decoration: underline;
+        }
+        .language-popup {
+            min-width: 200px;
+        }
+        .language-popup h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .language-popup p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .language-popup a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .language-popup a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    
+    <div id="time-slider-container">
+        <div id="current-period">기원전 40세기-30세기</div>
+        <div id="period-description">4대 문명 발생기 (수메르, 이집트, 인더스, 황하)</div>
+        <input type="range" id="time-slider" min="0" value="0" step="1">
+    </div>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        let timePeriods = [];
+        let languages = [];
+        let influences = [];
+        let historicalBoundaries = [];
+        let currentPeriodIndex = 0;
+        let map;
+        let boundaryLayers = [];
+        let languageMarkers = [];
+        let influenceArrows = [];
+        
+        // 시대별 색상 시스템
+        function getBoundaryColor(periodId) {
+            const colorMap = {
+                // 고대 (기원전)
+                'ancient_40th_30th_century_bce': '#8B4513',
+                'ancient_30th_20th_century_bce': '#A0522D',
+                'ancient_20th_10th_century_bce': '#CD853F',
+                'ancient_10th_5th_century_bce': '#D2691E',
+                'ancient_5th_1st_century_bce': '#B8860B',
+                
+                // 고대 (기원후)
+                'ancient_1st_century_ce': '#DAA520',
+                'ancient_2nd_century_ce': '#BDB76B',
+                'ancient_3rd_century_ce': '#F4A460',
+                'ancient_4th_century_ce': '#DEB887',
+                'ancient_5th_century_ce': '#D2B48C',
+                
+                // 중세
+                'medieval_6th_century_ce': '#708090',
+                'medieval_7th_century_ce': '#2F4F4F',
+                'medieval_8th_century_ce': '#008080',
+                'medieval_9th_century_ce': '#4682B4',
+                'medieval_10th_century_ce': '#5F9EA0',
+                'medieval_11th_century_ce': '#6495ED',
+                'medieval_12th_century_ce': '#483D8B',
+                'medieval_13th_century_ce': '#6A5ACD',
+                'medieval_14th_century_ce': '#7B68EE',
+                'medieval_15th_century_ce': '#9370DB',
+                
+                // 근대
+                'modern_16th_century_ce': '#228B22',
+                'modern_17th_century_ce': '#32CD32',
+                'modern_18th_century_ce': '#006400',
+                'modern_19th_century_ce': '#008000',
+                'modern_20th_century_ce': '#2E8B57',
+                'modern_21st_century_ce': '#3CB371'
+            };
+            
+            return colorMap[periodId] || '#666666';
+        }
+        
+        function getBoundaryFillColor(periodId) {
+            const color = getBoundaryColor(periodId);
+            return color + '4D'; // Hex alpha: 4D = 30%
+        }
+        
+        // 데이터 로드
+        async function loadData() {
+            try {
+                console.log('Loading data...');
+                const [periodsRes, langsRes, inflRes, boundsRes] = await Promise.all([
+                    fetch('/api/time-periods'),
+                    fetch('/api/languages'),
+                    fetch('/api/language-influences'),
+                    fetch('/api/historical-boundaries')
+                ]);
+                
+                timePeriods = (await periodsRes.json()).periods;
+                console.log('Time periods loaded:', timePeriods.length);
+                
+                languages = (await langsRes.json()).languages;
+                console.log('Languages loaded:', languages.length);
+                
+                influences = (await inflRes.json()).influences;
+                console.log('Influences loaded:', influences.length);
+                
+                historicalBoundaries = (await boundsRes.json()).boundaries;
+                console.log('Historical boundaries loaded:', historicalBoundaries.length);
+                
+                initializeMap();
+                updateDisplay();
+                console.log('Initialization complete');
+            } catch (error) {
+                console.error('Error loading data:', error);
+            }
+        }
+        
+        function initializeMap() {
+            map = L.map('map').setView([20, 0], 2);
+            
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 19
+            }).addTo(map);
+            
+            // 슬라이더 범위 설정
+            const slider = document.getElementById('time-slider');
+            slider.max = timePeriods.length - 1;
+        }
+        
+        function renderHistoricalBoundaries(periodId) {
+            console.log('=== Rendering boundaries for period:', periodId, '===');
+            console.log('Available period IDs:', historicalBoundaries.map(b => b.period_id).slice(0, 10));
+            
+            // 기존 경계 제거
+            boundaryLayers.forEach(layer => map.removeLayer(layer));
+            boundaryLayers = [];
+            
+            const boundaryData = historicalBoundaries.find(b => b.period_id === periodId);
+            console.log('Boundary data found:', boundaryData ? 'Yes' : 'No');
+            
+            if (boundaryData) {
+                console.log('Number of regions:', boundaryData.regions.length);
+                console.log('Sample region:', boundaryData.regions[0]);
+                
+                boundaryData.regions.forEach((region, index) => {
+                    console.log(`Processing region ${index}:`, region.name);
+                    console.log('Region coordinates type:', Array.isArray(region.coordinates) ? 'Array' : typeof region.coordinates);
+                    console.log('Region coordinates length:', region.coordinates.length);
+                    
+                    const geoJsonFeature = {
+                        "type": "Feature",
+                        "properties": {
+                            "name": region.name,
+                            "original_name": region.original_name,
+                            "wikipedia_url": region.wikipedia_url
+                        },
+                        "geometry": {
+                            "type": "Polygon",
+                            "coordinates": region.coordinates
+                        }
+                    };
+                    
+                    console.log('GeoJSON feature created:', geoJsonFeature);
+                    
+                    try {
+                        const geoJsonLayer = L.geoJSON(geoJsonFeature, {
+                            style: function(feature) {
+                                const color = getBoundaryColor(periodId);
+                                console.log('Using color:', color);
+                                return {
+                                    color: color,
+                                    weight: 3,
+                                    opacity: 1.0,
+                                    fillOpacity: 0.5,
+                                    fillColor: getBoundaryFillColor(periodId)
+                                };
+                            },
+                            onEachFeature: function(feature, layer) {
+                                console.log('Adding tooltip for:', feature.properties.name);
+                                layer.bindTooltip(feature.properties.name, {
+                                    permanent: true,
+                                    direction: 'center',
+                                    className: 'boundary-label'
+                                });
+                                
+                                layer.on('click', function(e) {
+                                    showRegionInfo(feature.properties, e.latlng);
+                                });
+                            }
+                        }).addTo(map);
+                        
+                        boundaryLayers.push(geoJsonLayer);
+                        console.log(`Region ${index} added successfully. Total layers: ${boundaryLayers.length}`);
+                    } catch (error) {
+                        console.error(`Error rendering region ${index}:`, error);
+                        console.error('Error details:', error.stack);
+                    }
+                });
+                
+                console.log('=== Boundary rendering complete ===');
+            } else {
+                console.log('No boundary data found for period:', periodId);
+            }
+        }
+        
+        function showRegionInfo(properties, latlng) {
+            const popupContent = `
+                <div class="region-popup">
+                    <h3>${properties.name}</h3>
+                    <p><strong>원문명:</strong> ${properties.original_name}</p>
+                    ${properties.wikipedia_url ? `<a href="${properties.wikipedia_url}" target="_blank">위키피디아에서 보기</a>` : ''}
+                </div>
+            `;
+            
+            L.popup()
+                .setLatLng(latlng)
+                .setContent(popupContent)
+                .openOn(map);
+        }
+        
+        function updateDisplay() {
+            console.log('Updating display for period index:', currentPeriodIndex);
+            const period = timePeriods[currentPeriodIndex];
+            console.log('Current period:', period);
+            
+            document.getElementById('current-period').textContent = period.name;
+            document.getElementById('period-description').textContent = period.description;
+            
+            // 기존 레이어 제거
+            boundaryLayers.forEach(layer => map.removeLayer(layer));
+            languageMarkers.forEach(marker => map.removeLayer(marker));
+            influenceArrows.forEach(arrow => map.removeLayer(arrow));
+            boundaryLayers = [];
+            languageMarkers = [];
+            influenceArrows = [];
+            
+            // 역사적 경계 렌더링
+            console.log('Rendering boundaries for period:', period.id);
+            renderHistoricalBoundaries(period.id);
+            
+            // 언어 마커 렌더링
+            languages.forEach(lang => {
+                const periodData = lang.periods.find(p => p.period_id === period.id);
+                if (periodData && (periodData.status === 'emerging' || periodData.status === 'established' || periodData.status === 'dominant' || periodData.status === 'expanding')) {
+                    const marker = L.circleMarker([lang.origin_location.lat, lang.origin_location.lng], {
+                        radius: 8,
+                        fillColor: getStatusColor(periodData.status),
+                        color: '#fff',
+                        weight: 2,
+                        opacity: 1,
+                        fillOpacity: 0.8
+                    }).addTo(map);
+                    
+                    marker.bindPopup(`
+                        <div class="language-popup">
+                            <h3>${lang.name}</h3>
+                            <p><strong>어족:</strong> ${lang.family}</p>
+                            <p><strong>기원:</strong> ${lang.origin_year > 0 ? lang.origin_year + '년' : '기원전 ' + Math.abs(lang.origin_year) + '년'}</p>
+                            <p><strong>상태:</strong> ${getStatusText(periodData.status)}</p>
+                            <a href="${lang.wikipedia_url}" target="_blank">위키피디아에서 보기</a>
+                        </div>
+                    `);
+                    
+                    languageMarkers.push(marker);
+                }
+            });
+            
+            // 영향 화살표 렌더링
+            influences.forEach(inf => {
+                if (inf.period_id === period.id) {
+                    const fromLang = languages.find(l => l.id === inf.from);
+                    const toLang = languages.find(l => l.id === inf.to);
+                    
+                    if (fromLang && toLang) {
+                        const arrow = L.polyline([
+                            [fromLang.origin_location.lat, fromLang.origin_location.lng],
+                            [toLang.origin_location.lat, toLang.origin_location.lng]
+                        ], {
+                            color: inf.type === 'parent' ? '#ff6b6b' : '#4ecdc4',
+                            weight: 3,
+                            opacity: 0.7,
+                            dashArray: '5, 10'
+                        }).addTo(map);
+                        
+                        influenceArrows.push(arrow);
+                    }
+                }
+            });
+            
+            console.log('Display update complete');
+        }
+        
+        function getStatusColor(status) {
+            const colors = {
+                'emerging': '#ff6b6b',
+                'established': '#4ecdc4',
+                'dominant': '#45b7d1',
+                'expanding': '#96ceb4',
+                'declining': '#ffeaa7',
+                'extinct': '#bdc3c7'
+            };
+            return colors[status] || '#95a5a6';
+        }
+        
+        function getStatusText(status) {
+            const texts = {
+                'emerging': '발생기',
+                'established': '정착기',
+                'dominant': '우세',
+                'expanding': '확장중',
+                'declining': '쇠퇴기',
+                'extinct': '소멸'
+            };
+            return texts[status] || status;
+        }
+        
+        // 시간 슬라이더
+        const slider = document.getElementById('time-slider');
+        slider.addEventListener('input', (e) => {
+            console.log('Slider value changed to:', e.target.value);
+            currentPeriodIndex = parseInt(e.target.value);
+            console.log('Current period index:', currentPeriodIndex);
+            updateDisplay();
+        });
+        
+        // 초기화
+        loadData();
+    </script>
+</body>
+</html>

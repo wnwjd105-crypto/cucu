@@ -1,0 +1,68 @@
+{
+  "influences": [
+    {
+      "id": "latin_to_french",
+      "from": "latin",
+      "to": "french",
+      "period_id": "medieval_9th_century_ce",
+      "type": "parent",
+      "strength": 0.9
+    },
+    {
+      "id": "latin_to_spanish",
+      "from": "latin",
+      "to": "spanish",
+      "period_id": "medieval_10th_century_ce",
+      "type": "parent",
+      "strength": 0.9
+    },
+    {
+      "id": "sanskrit_to_chinese",
+      "from": "sanskrit",
+      "to": "chinese",
+      "period_id": "ancient_2nd_1st_century_bce",
+      "type": "borrowing",
+      "strength": 0.4
+    },
+    {
+      "id": "chinese_to_korean",
+      "from": "chinese",
+      "to": "korean",
+      "period_id": "medieval_10th_century_ce",
+      "type": "borrowing",
+      "strength": 0.7
+    },
+    {
+      "id": "chinese_to_japanese",
+      "from": "chinese",
+      "to": "japanese",
+      "period_id": "medieval_8th_century_ce",
+      "type": "borrowing",
+      "strength": 0.8
+    },
+    {
+      "id": "arabic_to_spanish",
+      "from": "arabic",
+      "to": "spanish",
+      "period_id": "medieval_13th_century_ce",
+      "type": "borrowing",
+      "strength": 0.5
+    },
+    {
+      "id": "english_to_french",
+      "from": "english",
+      "to": "french",
+      "period_id": "modern_19th_century_ce",
+      "type": "contact",
+      "strength": 0.3
+    },
+    {
+      "id": "french_to_english",
+      "from": "french",
+      "to": "english",
+      "period_id": "medieval_11th_century_ce",
+      "type": "borrowing",
+      "strength": 0.6
+    }
+  ]
+}

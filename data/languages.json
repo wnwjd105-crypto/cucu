@@ -1,0 +1,266 @@
+{
+  "languages": [
+    {
+      "id": "chinese",
+      "name": "중국어",
+      "family": "중국티베트어족",
+      "origin_year": -1250,
+      "origin_location": {
+        "lat": 34.5,
+        "lng": 108.9
+      },
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Chinese_language",
+      "periods": [
+        {
+          "period_id": "ancient_13th_12th_century_bce",
+          "status": "emerging"
+        },
+        {
+          "period_id": "ancient_11th_10th_century_bce",
+          "status": "established"
+        },
+        {
+          "period_id": "ancient_3rd_2nd_century_bce",
+          "status": "dominant"
+        },
+        {
+          "period_id": "modern_21st_century_ce",
+          "status": "dominant"
+        }
+      ]
+    },
+    {
+      "id": "japanese",
+      "name": "일본어",
+      "family": "일본어족",
+      "origin_year": -300,
+      "origin_location": {
+        "lat": 35.0,
+        "lng": 138.0
+      },
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Japanese_language",
+      "periods": [
+        {
+          "period_id": "ancient_4th_3rd_century_bce",
+          "status": "emerging"
+        },
+        {
+          "period_id": "medieval_8th_century_ce",
+          "status": "established"
+        },
+        {
+          "period_id": "modern_21st_century_ce",
+          "status": "dominant"
+        }
+      ]
+    },
+    {
+      "id": "korean",
+      "name": "한국어",
+      "family": "한국어족",
+      "origin_year": -100,
+      "origin_location": {
+        "lat": 37.5,
+        "lng": 127.0
+      },
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Korean_language",
+      "periods": [
+        {
+          "period_id": "ancient_2nd_1st_century_bce",
+          "status": "emerging"
+        },
+        {
+          "period_id": "medieval_10th_century_ce",
+          "status": "established"
+        },
+        {
+          "period_id": "modern_21st_century_ce",
+          "status": "dominant"
+        }
+      ]
+    },
+    {
+      "id": "sanskrit",
+      "name": "산스크리트어",
+      "family": "인도유럽어족",
+      "origin_year": -1500,
+      "origin_location": {
+        "lat": 28.0,
+        "lng": 77.0
+      },
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Sanskrit",
+      "periods": [
+        {
+          "period_id": "ancient_16th_15th_century_bce",
+          "status": "emerging"
+        },
+        {
+          "period_id": "ancient_6th_5th_century_bce",
+          "status": "dominant"
+        },
+        {
+          "period_id": "medieval_10th_century_ce",
+          "status": "declining"
+        },
+        {
+          "period_id": "modern_21st_century_ce",
+          "status": "extinct"
+        }
+      ]
+    },
+    {
+      "id": "latin",
+      "name": "라틴어",
+      "family": "인도유럽어족",
+      "origin_year": -700,
+      "origin_location": {
+        "lat": 41.9,
+        "lng": 12.5
+      },
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Latin",
+      "periods": [
+        {
+          "period_id": "ancient_8th_7th_century_bce",
+          "status": "emerging"
+        },
+        {
+          "period_id": "ancient_1st_century_ce",
+          "status": "dominant"
+        },
+        {
+          "period_id": "medieval_6th_century_ce",
+          "status": "declining"
+        },
+        {
+          "period_id": "modern_21st_century_ce",
+          "status": "extinct"
+        }
+      ]
+    },
+    {
+      "id": "greek",
+      "name": "그리스어",
+      "family": "인도유럽어족",
+      "origin_year": -1450,
+      "origin_location": {
+        "lat": 39.0,
+        "lng": 22.0
+      },
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Greek_language",
+      "periods": [
+        {
+          "period_id": "ancient_15th_14th_century_bce",
+          "status": "emerging"
+        },
+        {
+          "period_id": "ancient_5th_4th_century_bce",
+          "status": "dominant"
+        },
+        {
+          "period_id": "modern_21st_century_ce",
+          "status": "dominant"
+        }
+      ]
+    },
+    {
+      "id": "arabic",
+      "name": "아랍어",
+      "family": "아프로아시아어족",
+      "origin_year": 1,
+      "origin_location": {
+        "lat": 24.0,
+        "lng": 45.0
+      },
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Arabic",
+      "periods": [
+        {
+          "period_id": "ancient_1st_century_ce",
+          "status": "emerging"
+        },
+        {
+          "period_id": "medieval_7th_century_ce",
+          "status": "dominant"
+        },
+        {
+          "period_id": "modern_21st_century_ce",
+          "status": "dominant"
+        }
+      ]
+    },
+    {
+      "id": "english",
+      "name": "영어",
+      "family": "인도유럽어족",
+      "origin_year": 450,
+      "origin_location": {
+        "lat": 51.5,
+        "lng": -0.1
+      },
+      "wikipedia_url": "https://en.wikipedia.org/wiki/English_language",
+      "periods": [
+        {
+          "period_id": "ancient_5th_century_ce",
+          "status": "emerging"
+        },
+        {
+          "period_id": "modern_19th_century_ce",
+          "status": "dominant"
+        },
+        {
+          "period_id": "modern_21st_century_ce",
+          "status": "dominant"
+        }
+      ]
+    },
+    {
+      "id": "spanish",
+      "name": "스페인어",
+      "family": "인도유럽어족",
+      "origin_year": 900,
+      "origin_location": {
+        "lat": 40.4,
+        "lng": -3.7
+      },
+      "wikipedia_url": "https://en.wikipedia.org/wiki/Spanish_language",
+      "periods": [
+        {
+          "period_id": "medieval_10th_century_ce",
+          "status": "emerging"
+        },
+        {
+          "period_id": "modern_16th_century_ce",
+          "status": "expanding"
+        },
+        {
+          "period_id": "modern_21st_century_ce",
+          "status": "dominant"
+        }
+      ]
+    },
+    {
+      "id": "french",
+      "name": "프랑스어",
+      "family": "인도유럽어족",
+      "origin_year": 800,
+      "origin_location": {
+        "lat": 46.2,
+        "lng": 2.2
+      },
+      "wikipedia_url": "https://en.wikipedia.org/wiki/French_language",
+      "periods": [
+        {
+          "period_id": "medieval_9th_century_ce",
+          "status": "emerging"
+        },
+        {
+          "period_id": "modern_17th_century_ce",
+          "status": "dominant"
+        },
+        {
+          "period_id": "modern_21st_century_ce",
+          "status": "dominant"
+        }
+      ]
+    }
+  ]
+}
